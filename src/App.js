@@ -1,24 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPersons, personService } from './services/person.service';
+import { PersonPreview } from './cmps/PersonPreview';
 
 function App() {
+
+  const dispatch = useDispatch();
+  const persons = useSelector(state => state.personReducer.persons)
+
+  useEffect(() => {
+    dispatch(getAllPersons())
+  }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h3 >My contact page</h3>
       </header>
-    </div>
+      <section className='main-content'>
+        {persons.length > 0 ? <ul className='person-container'> {persons.map(person => <PersonPreview person={person} />)}</ul> : <h1>loading...</h1>}
+      </section>
+      <footer className="App-footer"></footer>
+    </div >
   );
 }
 
