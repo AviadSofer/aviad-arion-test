@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updatePerson } from "../services/person.service";
 
 export const PersonPreview = ({ person }) => {
 
-    const dispatch = useDispatch()
     const { related } = person
     const [toggleEditMode, setToggleEditMode] = useState(false)
     const [personState, setPersonState] = useState(person)
 
     const handleChange = () => {
-        // TODO: update person
+        // TODO: handle change event input
     }
-    
+
     const onUpdatePerson = () => {
-        // TODO: update person
+        // TODO: update person (use updatePerson function in person.service)
 
     }
 
@@ -31,7 +29,7 @@ export const PersonPreview = ({ person }) => {
                             return (
                                 <li className={`related-preview ${toggleEditMode ? 'edit-mode' : ''}`} key={key}>
                                     <h5>{key}:</h5>
-                                    {!toggleEditMode ? <h5>{value}</h5> : <input name={key} type="text" value={inputVal} onChange={(ev) => handleChange(ev, relatedType)} />}
+                                    {!toggleEditMode ? <h5>{value}</h5> : <input name={key} type="text" value={inputVal} onChange={handleChange} />}
                                 </li>
                             )
                         })}

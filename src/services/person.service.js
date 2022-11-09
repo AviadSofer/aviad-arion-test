@@ -16,29 +16,11 @@ export const updatePerson = (person) => async (dispatch) => {
     return personRespnse;
 }
 
-async function query(entityType, delay = 200) {
-    // TODO:
-    try {
-        let entities = storageService.loadFromStorage(entityType) || []
-        if (!entities.length) {
-            entities = PERSONS
-            storageService.saveToStorage(entityType, entities)
-        }
-        return new Promise((resolve) => setTimeout(resolve, delay, entities))
-    } catch (err) {
-        console.log('err', err)
-    }
+async function query() {
+    // TODO: get data from local storage if empty get from service and save to local storage
 }
-async function put(entityType, person) {
-    try {
-        let entities = await query(entityType)
-        const idx = entities.findIndex(entity => entity.id === person.id)
-        entities[idx] = person
-        storageService.saveToStorage(entityType, entities)
-        return entities[idx]
-    } catch (err) {
-        console.log('err', err)
-    }
+async function put() {
+    // TODO: update person in local storage
 }
 
 
